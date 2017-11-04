@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class InputNode  extends Node{
 	private double value;
 	public void setValue(double value) {

@@ -2,10 +2,8 @@
 public class Weight {
 	private double weight;
 	private Node input,output;
-	public Weight(double weight) {
+	public Weight(double weight,Node in,Node out) {
 		this.weight=weight;
-	}
-	public void setNodes(Node in,Node out) {
 		input = in;
 		output = out;
 	}
@@ -21,4 +19,8 @@ public class Weight {
 	public double getWeight() {
 		return weight;
 	}
+	public void setWeight(double d) {
+		weight=d;
+	}
+
 }

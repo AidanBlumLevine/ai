@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+
 public class OutputNode  extends Node{
-	private Weight[] inputs;
+	private ArrayList<Weight> inputs = new ArrayList<>();
 	private double target;
-	public OutputNode(Weight[] inputs) {
-		this.inputs = inputs;
+	public void addInput(Weight input) {
+		inputs.add(input);
 	}
 	public double gradient() {
-		return super.fPrime(getInput())*(getOutput()-target);
+		return super.softmaxPrime(getInput())*(getOutput()-target);
 	}
 	public double getInput() {
 		double output=0;
@@ -18,7 +20,7 @@ public class OutputNode  extends Node{
 		this.target=target;
 	}
 	public double getOutput() {
-		return super.f(getInput());
+		return super.softmax(getInput());
 	}
 	public double error() {
 		return Math.pow(getOutput()-target,2)/2d;

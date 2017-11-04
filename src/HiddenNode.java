@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 
 public class HiddenNode extends Node{
-	private Weight[] outputs,inputs;
-	public HiddenNode(Weight[] inputs,Weight[] outputs) {
-		this.inputs = inputs;
-		this.outputs = outputs;
+	private ArrayList<Weight> outputs = new ArrayList<>(),inputs = new ArrayList<>();
+	public void addInput(Weight input) {
+		inputs.add(input);
+	}
+	public void addOutput(Weight output) {
+		outputs.add(output);
 	}
 	public double gradient() {
 		double gradient=0;
