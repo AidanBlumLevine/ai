@@ -3,6 +3,7 @@ public class InputNode  extends Node{
 	public void setValue(double value) {
 		this.value=value;
 	}
+
 	public double getOutput() {
 		return value;
 	}

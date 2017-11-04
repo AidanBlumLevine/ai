@@ -1,3 +1,4 @@
+package graph;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,15 +8,24 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-import graph.Graph;
-import graph.Point;
-
-public class Network{
-	private static ArrayList<Point> points = new ArrayList<Point>();
-	public static void main(String[] args) {
+public class Graph{
+	private ArrayList<Point> points = new ArrayList<Point>();
+	private double xLow,xHigh,yLow,yHigh,streams;
+	private double xScale,yScale;
+	private JPanel panel;
+	public Graph(double xLow,double xHigh,double yLow,double yHigh,int streams){
+		this.xLow=xLow;
+		this.xHigh=xHigh;
+		this.yLow=yLow;
+		this.yHigh=yHigh;
+		this.streams=streams;
+		xScale=500/(xHigh-xLow);
+		yScale=500/(yHigh-yLow);
+		
 		JFrame frame = new JFrame("Graph");
-		JPanel panel = new JPanel(){
+		panel = new JPanel(){
 			@Override
 			public void paint(Graphics g){
 				Graphics2D g2d = (Graphics2D) g;
@@ -32,22 +42,28 @@ public class Network{
 	    frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-		NeuralNetwork network = new NeuralNetwork(1,10,1);
-		for(int i=0;i<100000;i++) {
-			double value = Math.random()*7-3.5;
-			network.train(new double[] {value},new double[] {Math.sin(value)}, .05);
-			if(i%100==0) {
-				
-			}
-		}
-		for(double j = -3.5;j<=3.5;j+=.1) {
-			g.clearLine(Color.BLACK);
-			g.addPoint(j, Math.sin(j), Color.BLACK);
-			g.clearLine(Color.GREEN);
-			g.addPoint(j, network.run(new double[] {j})[0], Color.GREEN);
-			System.out.println( network.run(new double[] {j})[0]);
-		}
-		g.update();
 	}
 
+	
+	public void addPoint(double x,double y,Color color){
+		points.add(new Point(x,y, color));
+	}
+
+	public void update(){
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		    	panel.repaint();
+		    }});
+	}
+
+
+	public void clearLine(Color color) {
+		for(int p=0;p<points.size();p++){
+			if(points.get(p).getColor().equals(color)){
+				points.remove(p);
+				p--;
+			}
+		}
+		
+	}
 }
