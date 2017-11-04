@@ -19,8 +19,8 @@ public class Network{
 		for(int i=0;i<10000000;i++) {
 			double value = Math.random()*7-3.5;
 			network.train(new double[] {value},new double[] {Math.sin(value)}, .05);
-			if(i%100==0) {
-				
+			if(i%10000==0) {
+				System.out.println(i+"/10000000");
 			}
 		}
 		ArrayList<Point2D.Double> approximation = new ArrayList<Point2D.Double>();
@@ -30,6 +30,5 @@ public class Network{
 		}
 		g.addLine(new Line(approximation,Color.GREEN));
 		g.repaint();
-		System.out.println("DSF");
 	}
 }
