@@ -27,7 +27,24 @@ public abstract class Node {
 			return .01;
 		}
 	}
-
+	public double step(double in) {
+		if(in<-.1) {
+			return -1;
+		} else if(in>.1) {
+			return 1;
+		} else {
+			return in*10;
+		}
+	}
+	public double stepPrime(double in) {
+		if(in>=-.1 && in<=.1) {
+			return 10;
+		} else {
+			return 0;
+		}
+	}
+	
+	
 	public double softmax(double in) {
 		return in;
 	}
