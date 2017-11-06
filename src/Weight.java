@@ -29,4 +29,8 @@ public class Weight {
 		weight = d;
 	}
 
+	public Node getInputNode() {
+		return input;
+	}
+
 }
