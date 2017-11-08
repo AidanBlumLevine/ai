@@ -6,7 +6,7 @@ import graph.Graph;
 import graph.Line;
 
 public class SinNetwork{
-	private static NeuralNetwork network;
+	private static DeepNeuralNetwork network;
 	public static void main(String[] args) {
 		Graph g = new Graph(-12,-2,12,2);
 		ArrayList<Point2D.Double> sin = new ArrayList<Point2D.Double>();
@@ -15,10 +15,10 @@ public class SinNetwork{
 		}
 		g.addLine(new Line(sin,Color.GRAY));
 		g.repaint();
-		network = new NeuralNetwork(1,10,1,"relu","linear");
+		network = new DeepNeuralNetwork(1,new int[] {10,10},1,"relu","linear");
 		for(int i=0;i<1000000;i++) {
 			double value = Math.random()*7-3.5;
-			network.train(new double[] {value},new double[] {f(value)}, .05);
+			network.train(new double[] {value},new double[] {f(value)}, .0005);
 			if(i%1000==0) {
 				ArrayList<Point2D.Double> approximation = new ArrayList<Point2D.Double>();
 				g.removeLine(Color.GREEN);
@@ -29,7 +29,7 @@ public class SinNetwork{
 				g.repaint();
 			}
 		}
-		network.printEquation();
+		//network.printEquation();
 	}
 	
 	private static double f(double x) {

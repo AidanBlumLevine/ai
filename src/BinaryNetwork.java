@@ -1,7 +1,7 @@
 import graph.Graph3D;
 
 public class BinaryNetwork {
-	private static NeuralNetwork network = new NeuralNetwork(2,20,1,"relu","linear");
+	private static DeepNeuralNetwork network = new DeepNeuralNetwork(2,new int[] {20,9},1,"relu","linear");
 	public static void main(String[] args) throws InterruptedException {
 		Graph3D graph= new Graph3D();
 		for(int i=0;i<1000000;i++) {
@@ -23,8 +23,8 @@ public class BinaryNetwork {
 			if(a<.5 && b<.5 || a>.5 && b>.5) {
 			output=1;
 		}
-			network.train(new double[] {a,b},new double[] {output},.05);
-			if(i%100==0) {
+			network.train(new double[] {a,b},new double[] {output},.005);
+			if(i%10==0) {
 				double[][] points = new double[500][500];
 				for(int x=0;x<500;x++) {
 					for(int y=0;y<500;y++) {
