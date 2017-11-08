@@ -1,11 +1,7 @@
-public class InputNode  extends Node{
-	private double value;
-	public void setValue(double value) {
-		this.value=value;
-	}
 
+public class BiasNode extends Node{
 	public double getOutput() {
-		return value;
+		return 1;
 	}
 
 	public double gradient() {return (Double) null;}
@@ -13,7 +9,6 @@ public class InputNode  extends Node{
 
 	@Override
 	public String getEquation() {
-		return "x";
+		return "1";
 	}
-
 }

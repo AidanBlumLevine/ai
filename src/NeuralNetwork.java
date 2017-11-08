@@ -6,21 +6,20 @@ public class NeuralNetwork {
 	private ArrayList<OutputNode> outputLayer = new ArrayList<>();
 	private ArrayList<Weight> weights = new ArrayList<>();
 
-	public NeuralNetwork(int inputs, int hidden, int outputs) {
-		InputNode bias = new InputNode();
-		bias.setValue(1);
+	public NeuralNetwork(int inputs, int hidden, int outputs,String hiddenActivator,String outputActivator) {
+		BiasNode bias = new BiasNode();
 		for (int i = 0; i < inputs; i++) {
 			inputLayer.add(new InputNode());
 		}
 		for (int i = 0; i < hidden; i++) {
-			HiddenNode h = new HiddenNode();
+			HiddenNode h = new HiddenNode(hiddenActivator);
 			Weight w = new Weight(Math.random(), bias, h);
 			weights.add(w);
 			h.addInput(w);
 			hiddenLayer.add(h);
 		}
 		for (int i = 0; i < outputs; i++) {
-			OutputNode o = new OutputNode();
+			OutputNode o = new OutputNode(outputActivator);
 			Weight w = new Weight(Math.random(), bias, o);
 			weights.add(w);
 			o.addInput(w);
@@ -94,5 +93,11 @@ public class NeuralNetwork {
 			error += o.error();
 		}
 		return error;
+	}
+	
+	public void printEquation() {
+		for(OutputNode o:outputLayer) {
+			System.out.println(o.getEquation());
+		}
 	}
 }

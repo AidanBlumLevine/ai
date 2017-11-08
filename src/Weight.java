@@ -33,4 +33,8 @@ public class Weight {
 		return input;
 	}
 
+	public String getEquation() {
+		return weight+"*"+input.getEquation();
+	}
+
 }

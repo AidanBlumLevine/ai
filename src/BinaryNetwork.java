@@ -1,7 +1,7 @@
 import graph.Graph3D;
 
 public class BinaryNetwork {
-	private static NeuralNetwork network = new NeuralNetwork(2,20,1);
+	private static NeuralNetwork network = new NeuralNetwork(2,20,1,"relu","linear");
 	public static void main(String[] args) throws InterruptedException {
 		Graph3D graph= new Graph3D();
 		for(int i=0;i<1000000;i++) {

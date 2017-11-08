@@ -5,14 +5,16 @@ public abstract class Node {
 	public abstract double getInput();
 
 	public abstract double getOutput();
+	
+	public abstract String getEquation();
 
 	 public double sigmoid(double in) {
 	 return 1/(1+Math.pow(Math.E,-1*in));
 	 }
 	 public double sigmoidPrime(double in) {
-	 return f(in)*(1-f(in));
+	 return sigmoid(in)*(1-sigmoid(in));
 	 }
-	public double f(double in) {
+	public double relu(double in) {
 		if (in > 0) {
 			return in;
 		} else {
@@ -20,7 +22,7 @@ public abstract class Node {
 		}
 	}
 
-	public double fPrime(double in) {
+	public double reluPrime(double in) {
 		if (in > 0) {
 			return 1;
 		} else {
@@ -44,6 +46,14 @@ public abstract class Node {
 		}
 	}
 	
+	
+	public double linear(double in) {
+		return in;
+	}
+
+	public double linearPrime(double in) {
+		return 1;
+	}
 	
 	public double softmax(double in) {
 		return in;

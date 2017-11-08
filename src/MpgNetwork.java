@@ -12,7 +12,7 @@ public class MpgNetwork {
 		    }
 		data.close();
 
-		NeuralNetwork network = new NeuralNetwork(6,6,1);
+		NeuralNetwork network = new NeuralNetwork(6,6,1,"relu","linear");
 		for(int n=0;n<500;n++) {
 			for(int i=0;i<dataLines.size();i++) {
 				double mpg = Double.valueOf(dataLines.get(i).split(" ")[0]);
