@@ -17,14 +17,14 @@ public class BinaryNetwork {
 			double a = Math.random();
 			double b = Math.random();
 			double output = 0;
-//			if((a-.5)*(a-.5)+(b-.5)*(b-.5)<.1) {
-//				output=1;
-//			}
-			if(a<.5 && b<.5 || a>.5 && b>.5) {
-			output=1;
-		}
-			network.train(new double[] {a,b},new double[] {output},.005);
-			if(i%10==0) {
+			if((a-.5)*(a-.5)+(b-.5)*(b-.5)<.1) {
+				output=1;
+			}
+//			if(a<.5 && b<.5 || a>.5 && b>.5) {
+//			output=1;
+//		}
+			network.train(new double[] {a,b},new double[] {output},.05);
+			if(i%100==0) {
 				double[][] points = new double[500][500];
 				for(int x=0;x<500;x++) {
 					for(int y=0;y<500;y++) {

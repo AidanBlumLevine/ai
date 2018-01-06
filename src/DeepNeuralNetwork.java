@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DeepNeuralNetwork {
 	private ArrayList<HiddenNode>[] hiddenLayer;
@@ -24,7 +25,7 @@ public class DeepNeuralNetwork {
 		}
 		for (int i = 0; i < outputs; i++) {
 			OutputNode o = new OutputNode(outputActivator);
-			Weight w = new Weight(Math.random(), bias, o);
+			Weight w = new Weight(Math.random()-.5, bias, o);
 			weights.add(w);
 			o.addInput(w);
 			outputLayer.add(o);
@@ -54,9 +55,6 @@ public class DeepNeuralNetwork {
 				outputLayer.get(n).addInput(w);
 			}
 		}
-		for(ArrayList<HiddenNode> a:hiddenLayer) {
-			System.out.println(a.size());
-		}
 	}
 
 	public double[] run(double[] inputs) {
@@ -78,6 +76,8 @@ public class DeepNeuralNetwork {
 		if (inputs.length != inputLayer.size() || targets.length != outputLayer.size()) {
 			System.out.println("INCORRECT INPUT DATA TO RUN");
 		}
+		System.out.println("Inputs"+Arrays.toString(inputs));
+		System.out.println("Outputs"+Arrays.toString(targets));
 
 		for (int i = 0; i < inputLayer.size(); i++) {
 			inputLayer.get(i).setValue(inputs[i]);
