@@ -1,5 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class DeepNeuralNetwork {
 	private ArrayList<HiddenNode>[] hiddenLayer;
@@ -115,6 +120,43 @@ public class DeepNeuralNetwork {
 	public void printEquation() {
 		for(OutputNode o:outputLayer) {
 			System.out.println(o.getEquation());
+		}
+	}
+	
+	public void save(String fileName) {
+		try {
+			BufferedWriter br = new BufferedWriter(new FileWriter(fileName));
+            StringBuilder sb = new StringBuilder();
+            String image = "";
+            for (Weight w : weights) {
+            	image += w.getWeight()+",";
+            }
+            image = image.substring(0,image.length()-1);
+            br.write(image);
+            br.close();
+            System.out.println("Saved Network");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void load(String fileName) {
+		try {
+			String line = "";
+			Scanner data = new Scanner(new File(fileName)).useDelimiter("\n");
+			while (data.hasNext()) {
+			      line = data.next();
+			    }
+			data.close();
+			if(line.split(",").length != weights.size()) {
+				System.out.println("INCORRECT INPUT DATA TO LOAD");
+			}
+			for(int i=0;i<line.split(",").length;i++) {
+				weights.get(i).setWeight(Double.valueOf(line.split(",")[i]));
+			}
+			System.out.println("Loaded Network");
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 }
